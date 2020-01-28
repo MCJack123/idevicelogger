@@ -8,7 +8,7 @@
 #include <libimobiledevice/syslog_relay.h>
 #include <unistd.h>
 
-std::string log_cache_location = "/Users/jack/Downloads/idevicelogger/logs";
+std::string log_cache_location = "/var/log/iOS_logs";
 unsigned long max_buffer_size = 512;
 
 struct logger_connection {
@@ -207,6 +207,7 @@ int main(int argc, const char * argv[]) {
         }
     }
     if (nextarg) return usage(argv[0]);
+    mkdir(log_cache_location.c_str(), 0777);
     // Listen for events
     idevice_event_subscribe(idevice_eventCallback, NULL);
     std::cout << "Waiting for devices...\n";
